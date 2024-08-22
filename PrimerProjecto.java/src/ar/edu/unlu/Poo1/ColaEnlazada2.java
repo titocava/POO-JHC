@@ -1,6 +1,6 @@
 package ar.edu.unlu.Poo1;
 
-public class ColaEnlazada<T> implements Cola<T> {
+public class ColaEnlazada2<T> implements Cola2<T> {
 
     // Nodo de la cola
     private static class Nodo<T> {
@@ -18,7 +18,7 @@ public class ColaEnlazada<T> implements Cola<T> {
     private int tamanio;
 
     // Constructor para crear una cola vacía
-    public ColaEnlazada() {
+    public ColaEnlazada2() {
         this.frente = null;
         this.finalCola = null;
         this.tamanio = 0;

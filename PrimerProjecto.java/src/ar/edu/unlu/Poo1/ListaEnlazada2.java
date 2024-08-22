@@ -1,6 +1,6 @@
 package ar.edu.unlu.Poo1;
 
-public class ListaEnlazada<T> implements Lista<T> {
+public class ListaEnlazada2<T> implements Lista2<T> {
     // Nodo de la lista enlazada
     private static class Nodo<T> {
         private T dato;
@@ -16,7 +16,7 @@ public class ListaEnlazada<T> implements Lista<T> {
     private int longitud;
 
     // Constructor para crear una lista vacía
-    public ListaEnlazada() {
+    public ListaEnlazada2() {
         this.cabeza = null;
         this.longitud = 0;
     }

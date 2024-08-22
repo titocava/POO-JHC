@@ -1,9 +1,9 @@
 package ar.edu.unlu.Poo1;
 
-public class TP1 {
+public class ejemplo {
 	    public static void main(String[] args) {
 	        // Creación de una lista enlazada simple
-	        Lista<Integer> listaEnlazada = new ListaEnlazada<>();
+	        Lista2<Integer> listaEnlazada = new ListaEnlazada2<>();
 	        listaEnlazada.agregarAlFinal(1);
 	        listaEnlazada.agregarAlFinal(2);
 	        listaEnlazada.agregarAlFinal(3);
@@ -22,7 +22,7 @@ public class TP1 {
 	        listaEnlazada.imprimirLista();
 
 	        // Creación de una lista doblemente enlazada
-	        ListaDoble<Integer> listaDoble = new ListaEnlazadaDoble<>();
+	        ListaDoble2<Integer> listaDoble = new ListaEnlazadaDoble2<>();
 	        listaDoble.agregarAlFinal(1);
 	        listaDoble.agregarAlFinal(2);
 	        listaDoble.agregarAlFinal(3);
@@ -41,7 +41,7 @@ public class TP1 {
 	        listaDoble.imprimirLista();
 
 	        // Crear una pila y realizar operaciones
-	        PilaEnlazada<Integer> pila = new PilaEnlazada<>();
+	        PilaEnlazada2<Integer> pila = new PilaEnlazada2<>();
 
 	        // Apilar 5 elementos
 	        pila.apilar(10);

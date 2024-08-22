@@ -1,6 +1,6 @@
 package ar.edu.unlu.Poo1;
 
-public interface Cola<T> {
+public interface Cola2<T> {
     void encolar(T elemento); // Agregar un elemento al final de la cola
     T desencolar();          // Remover y devolver el primer elemento de la cola
     T frente();              // Obtener el primer elemento sin removerlo

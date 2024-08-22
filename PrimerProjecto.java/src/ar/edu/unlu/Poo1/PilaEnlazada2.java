@@ -1,6 +1,6 @@
 package ar.edu.unlu.Poo1;
 
-public class PilaEnlazada<T> implements Pila<T> {
+public class PilaEnlazada2<T> implements Pila2<T> {
 
     private static class Nodo<T> {
         private T dato;
@@ -15,7 +15,7 @@ public class PilaEnlazada<T> implements Pila<T> {
     private Nodo<T> cima;
     private int tamanio;
 
-    public PilaEnlazada() {
+    public PilaEnlazada2() {
         this.cima = null;
         this.tamanio = 0;
     }

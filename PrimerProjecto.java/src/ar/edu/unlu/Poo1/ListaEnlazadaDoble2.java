@@ -1,6 +1,6 @@
 package ar.edu.unlu.Poo1;
 
-public class ListaEnlazadaDoble<T> implements ListaDoble<T> {
+public class ListaEnlazadaDoble2<T> implements ListaDoble2<T> {
 
     private static class Nodo<T> {
         private T dato;
@@ -18,7 +18,7 @@ public class ListaEnlazadaDoble<T> implements ListaDoble<T> {
     private Nodo<T> cola;
     private int longitud;
 
-    public ListaEnlazadaDoble() {
+    public ListaEnlazadaDoble2() {
         this.cabeza = null;
         this.cola = null;
         this.longitud = 0;
