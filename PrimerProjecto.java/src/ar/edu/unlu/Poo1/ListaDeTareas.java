@@ -2,7 +2,7 @@ package ar.edu.unlu.Poo1;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-
+/*
 public class ListaDeTareas {
     private Lista<Tarea> listaDeTareas;
 
@@ -17,3 +17,4 @@ public class ListaDeTareas {
 
     // Métodos adicionales para interactuar con la lista de tareas
 }
+*/
