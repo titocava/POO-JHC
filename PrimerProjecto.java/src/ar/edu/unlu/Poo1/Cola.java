@@ -1,54 +1,58 @@
 package ar.edu.unlu.Poo1;
 
 public class Cola {
+    private NodoCola frente = null;
+    private NodoCola finalCola = null;
 
-    private Nodo cabeza;
-    private Nodo cola;
-    private int cantidadElementos;
-
-    public Cola() {
-        this.cantidadElementos = 0;
-    }
-
-    public void encolar(int valor) {
-        Nodo nuevoNodo = new Nodo(valor);
-        if (this.estaVacia()) {
-            this.cabeza = nuevoNodo;
-            this.cola = nuevoNodo;
+    // Encola un elemento al final de la cola
+    public void encolar(Object valor) {
+        NodoCola nuevoNodo = new NodoCola(valor);
+        if (this.colaVacia()) {
+            frente = nuevoNodo;
+            finalCola = nuevoNodo;
         } else {
-            this.cola.setSiguiente(nuevoNodo);
-            this.cola = nuevoNodo;
+            finalCola.setSiguiente(nuevoNodo);
+            finalCola = nuevoNodo;
         }
-        this.cantidadElementos++;
     }
 
-    public int desencolar() {
-        if (this.estaVacia()) {
-            throw new IllegalStateException("La cola está vacía");
+    // Desencola un elemento del frente de la cola
+    public Object desencolar() {
+        if (this.colaVacia()) {
+            return null;
         }
-        int valor = this.cabeza.getValor();
-        this.cabeza = this.cabeza.getSiguiente();
-        this.cantidadElementos--;
-        if (this.cabeza == null) {
-            this.cola = null;
+        NodoCola nodoFrente = frente;
+        frente = frente.getSiguiente();
+        if (frente == null) { // Si la cola queda vacía después de desencolar
+            finalCola = null;
         }
-        return valor;
+        return nodoFrente.getValor();
     }
 
-    public boolean estaVacia() {
-        return this.cantidadElementos == 0;
+    // Verifica si la cola está vacía
+    public boolean colaVacia() {
+        return frente == null;
     }
 
-    public int tamanio() {
-        return this.cantidadElementos;
-    }
+    // Imprime los elementos de la cola
+    public static void mostrar(Cola cola) {
+        Cola copiaCola = new Cola();
+        NodoCola actual = cola.frente;
 
-    public void imprimirCola() {
-        Nodo actual = cabeza;
+        // Desencolar e imprimir los elementos
         while (actual != null) {
-            System.out.print(actual.getValor() + " -> ");
+            Object valor = actual.getValor();
+            System.out.println(valor);  // Imprimir el valor
+            copiaCola.encolar(valor);   // Guardar en la copia
             actual = actual.getSiguiente();
         }
-        System.out.println("null");
+
+        // Restaurar la cola original en el orden correcto
+        actual = copiaCola.frente;
+        while (actual != null) {
+            cola.encolar(actual.getValor());
+            actual = actual.getSiguiente();
+        }
     }
 }
+

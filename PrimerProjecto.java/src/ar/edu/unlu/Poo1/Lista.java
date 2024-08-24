@@ -1,103 +1,103 @@
 package ar.edu.unlu.Poo1;
 
 public class Lista {
-
-    private Nodo inicio;
-    private int cantidadElementos;
+    private NodoLista cabeza;
+    private int cantidad;
 
     public Lista() {
-        this.inicio = null;
-        this.cantidadElementos = 0;
+        this.cabeza = null;
+        this.cantidad = 0;
     }
 
-    public void agregar(int valor) {
-        Nodo nuevoNodo = new Nodo(valor);
-        if (this.estaVacia()) {
-            this.inicio = nuevoNodo;
+    // Agrega un elemento al final de la lista
+    public void agregar(Object valor) {
+        NodoLista nuevoNodo = new NodoLista(valor);
+        nuevoNodo.setValor(valor);
+        if (estaVacia()) {
+            cabeza = nuevoNodo;
         } else {
-            Nodo nodoActual = this.inicio;
-            while (nodoActual.hasSiguiente() && !nodoActual.valorIs(valor)) {
-                nodoActual = nodoActual.getSiguiente();
+            NodoLista actual = cabeza;
+            while (actual.getSiguiente() != null) {
+                actual = actual.getSiguiente();
             }
-            if (!nodoActual.hasSiguiente() && !nodoActual.valorIs(valor)) {
-                nodoActual.setSiguiente(nuevoNodo);
-            }
+            actual.setSiguiente(nuevoNodo);
         }
-        this.cantidadElementos++;
+        cantidad++;
     }
 
-    public boolean estaVacia() {
-        return this.cantidadElementos == 0;
-    }
-
-    public int obtenerLongitud() {
-        return this.cantidadElementos;
-    }
-
-    public boolean eliminar(int valor) {
-        if (this.estaVacia()) {
+    // Elimina el primer nodo que contiene el valor especificado
+    public boolean eliminar(Object valor) {
+        if (estaVacia()) {
             return false;
         }
 
-        if (this.inicio.valorIs(valor)) {
-            this.inicio = this.inicio.getSiguiente();
-            this.cantidadElementos--;
+        if (cabeza.getValor().equals(valor)) {
+            cabeza = cabeza.getSiguiente();
+            cantidad--;
             return true;
         }
 
-        Nodo nodoActual = this.inicio;
-        while (nodoActual.hasSiguiente() && !nodoActual.getSiguiente().valorIs(valor)) {
-            nodoActual = nodoActual.getSiguiente();
+        NodoLista actual = cabeza;
+        while (actual.getSiguiente() != null && !actual.getSiguiente().getValor().equals(valor)) {
+            actual = actual.getSiguiente();
         }
 
-        if (nodoActual.hasSiguiente()) {
-            nodoActual.setSiguiente(nodoActual.getSiguiente().getSiguiente());
-            this.cantidadElementos--;
-            return true;
+        if (actual.getSiguiente() == null) {
+            return false; // El valor no fue encontrado
         }
 
-        return false; // No se encontró el elemento
+        actual.setSiguiente(actual.getSiguiente().getSiguiente());
+        cantidad--;
+        return true;
     }
 
-    public int obtener(int indice) {
-        if (indice < 0 || indice >= this.cantidadElementos) {
-            throw new IndexOutOfBoundsException("Índice fuera de rango.");
-        }
-
-        Nodo nodoActual = this.inicio;
-        for (int i = 0; i < indice; i++) {
-            nodoActual = nodoActual.getSiguiente();
-        }
-        return nodoActual.getValor();
-    }
-
-    public void insertarEn(int indice, int valor) {
-        if (indice < 0 || indice > this.cantidadElementos) {
-            throw new IndexOutOfBoundsException("Índice fuera de rango.");
-        }
-
-        Nodo nuevoNodo = new Nodo(valor);
-
-        if (indice == 0) {
-            nuevoNodo.setSiguiente(this.inicio);
-            this.inicio = nuevoNodo;
-        } else {
-            Nodo nodoActual = this.inicio;
-            for (int i = 0; i < indice - 1; i++) {
-                nodoActual = nodoActual.getSiguiente();
-            }
-            nuevoNodo.setSiguiente(nodoActual.getSiguiente());
-            nodoActual.setSiguiente(nuevoNodo);
-        }
-        this.cantidadElementos++;
-    }
-
-    public void imprimirLista() {
-        Nodo nodoActual = this.inicio;
-        while (nodoActual != null) {
-            System.out.print(nodoActual.getValor() + " -> ");
-            nodoActual = nodoActual.getSiguiente();
+    // Imprime todos los elementos de la lista
+    public void imprimir() {
+        NodoLista actual = cabeza;
+        while (actual != null) {
+            System.out.print(actual.getValor() + " -> ");
+            actual = actual.getSiguiente();
         }
         System.out.println("null");
+    }
+
+    // Inserta un elemento en una posición específica (0-indexado)
+    public void insertarEn(int posicion, Object valor) {
+        if (posicion < 0 || posicion > cantidad) {
+            throw new IndexOutOfBoundsException("Índice fuera de rango.");
+        }
+
+        NodoLista nuevoNodo = new NodoLista(valor);
+
+        if (posicion == 0) {
+            nuevoNodo.setSiguiente(cabeza);
+            cabeza = nuevoNodo;
+        } else {
+            NodoLista actual = cabeza;
+            for (int i = 0; i < posicion - 1; i++) {
+                actual = actual.getSiguiente();
+            }
+            nuevoNodo.setSiguiente(actual.getSiguiente());
+            actual.setSiguiente(nuevoNodo);
+        }
+        cantidad++;
+    }
+
+    // Verifica si la lista está vacía
+    public boolean estaVacia() {
+        return cabeza == null;
+    }
+
+    // Muestra un elemento en una posición específica (0-indexado)
+    public Object mostrarElemento(int posicion) {
+        if (posicion < 0 || posicion >= cantidad) {
+            throw new IndexOutOfBoundsException("Índice fuera de rango.");
+        }
+
+        NodoLista actual = cabeza;
+        for (int i = 0; i < posicion; i++) {
+            actual = actual.getSiguiente();
+        }
+        return actual.getValor();
     }
 }

@@ -7,13 +7,13 @@ public class Nodo {
      */
     private Nodo siguiente;
 
-    private final int valor;
+    private Object valor;
 
     public Nodo(int valor) {
         this.valor = valor;
     }
 
-    public int getValor() {
+    public Object getValor() {
         return this.valor;
     }
 
@@ -29,7 +29,7 @@ public class Nodo {
         return this.siguiente;
     }
 
-    public boolean valorIs(int valor) {
+    public boolean valorIs(Object valor) {
         return this.valor == valor;
     }
 }

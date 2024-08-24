@@ -1,47 +1,61 @@
 package ar.edu.unlu.Poo1;
 
 public class Pila {
+    private NodoPila tope = null;
 
-    private Nodo tope;
-    private int cantidadElementos;
-
-    public Pila() {
-        this.cantidadElementos = 0;
-    }
-
-    public void apilar(int valor) {
-        Nodo nuevoNodo = new Nodo(valor);
-        if (!this.estaVacia()) {
-            nuevoNodo.setSiguiente(this.tope);
+    // Apilar un nuevo elemento
+    public void apilar(Object valor) {
+        NodoPila nuevoTope = new NodoPila();
+        nuevoTope.setValor(valor);
+        if (this.pvacia()) {
+            tope = nuevoTope;
+        } else {
+            nuevoTope.setSiguiente(tope);
+            tope = nuevoTope;
         }
-        this.tope = nuevoNodo;
-        this.cantidadElementos++;
     }
 
-    public int desapilar() {
-        if (this.estaVacia()) {
-            throw new IllegalStateException("La pila está vacía");
+    // Desapilar un elemento
+    public Object desapilar() {
+        if (this.pvacia()) {
+            return null; // O lanzar una excepción si lo prefieres
         }
-        int valor = this.tope.getValor();
-        this.tope = this.tope.getSiguiente();
-        this.cantidadElementos--;
-        return valor;
+        NodoPila viejoTope = tope;
+        tope = viejoTope.getSiguiente();
+        return viejoTope.getValor();
     }
 
-    public boolean estaVacia() {
-        return this.cantidadElementos == 0;
+    // Verificar si la pila está vacía
+    public boolean pvacia() {
+        return tope == null;
     }
 
-    public int tamanio() {
-        return this.cantidadElementos;
+    // Obtener el valor en el tope de la pila
+    public Object tope() {
+        if (this.pvacia()) {
+            return null; // O lanzar una excepción si lo prefieres
+        }
+        return tope.getValor();
     }
 
-    public void imprimirPila() {
-        Nodo actual = tope;
+    // Mostrar la pila
+    public void mostrar() {
+        Pila copiaPila = new Pila();
+        NodoPila actual = tope;
+
+        // Desapilar e imprimir los elementos
         while (actual != null) {
-            System.out.print(actual.getValor() + " -> ");
+            Object valor = actual.getValor();
+            System.out.println(valor);  // Imprimir el valor
+            copiaPila.apilar(valor);    // Guardar en la copia
             actual = actual.getSiguiente();
         }
-        System.out.println("null");
+
+        // Restaurar la pila original apilando de nuevo desde la copia
+        actual = copiaPila.tope;
+        while (actual != null) {
+            this.apilar(actual.getValor());
+            actual = actual.getSiguiente();
+        }
     }
 }

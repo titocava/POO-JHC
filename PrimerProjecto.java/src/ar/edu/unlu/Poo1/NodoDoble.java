@@ -1,43 +1,37 @@
 package ar.edu.unlu.Poo1;
 
 public class NodoDoble {
-    private NodoDoble anterior;
+    private Object valor;
     private NodoDoble siguiente;
-    private final int valor;
+    private NodoDoble anterior;
 
-    public NodoDoble(int valor) {
+    public NodoDoble(Object valor) {
+        this.valor = valor;
+        this.siguiente = null;
+        this.anterior = null;
+    }
+
+    public Object getValor() {
+        return valor;
+    }
+
+    public void setValor(Object valor) {
         this.valor = valor;
     }
 
-    public int getValor() {
-        return this.valor;
-    }
-
-    public void setSiguiente(NodoDoble nodo) {
-        this.siguiente = nodo;
-    }
-
     public NodoDoble getSiguiente() {
-        return this.siguiente;
+        return siguiente;
     }
 
-    public void setAnterior(NodoDoble nodo) {
-        this.anterior = nodo;
+    public void setSiguiente(NodoDoble siguiente) {
+        this.siguiente = siguiente;
     }
 
     public NodoDoble getAnterior() {
-        return this.anterior;
+        return anterior;
     }
 
-    public boolean hasSiguiente() {
-        return this.siguiente != null;
-    }
-
-    public boolean hasAnterior() {
-        return this.anterior != null;
-    }
-
-    public boolean valorIs(int valor) {
-        return this.valor == valor;
+    public void setAnterior(NodoDoble anterior) {
+        this.anterior = anterior;
     }
 }

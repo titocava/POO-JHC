@@ -1,26 +1,23 @@
 package ar.edu.unlu.Poo1;
 
 import java.time.LocalDate;
-/*
- * 
- */
+
+import java.time.LocalDate;
 
 public class Tarea {
     private String descripcion;
     private int prioridad;
-    private String estado; // Puede ser "completada", "incompleta" o "vencida"
+    private boolean completa;
     private LocalDate fechaLimite;
 
     public Tarea(String descripcion, int prioridad, LocalDate fechaLimite) {
         this.descripcion = descripcion;
         this.prioridad = prioridad;
-        this.estado = "incompleta";
         this.fechaLimite = fechaLimite;
+        this.completa = false;
     }
 
-    // Getters y Setters
-
-    public void modificarDescripcion(String nuevaDescripcion) {
+    public void cambiarDescripcion(String nuevaDescripcion) {
         this.descripcion = nuevaDescripcion;
     }
 
@@ -28,23 +25,27 @@ public class Tarea {
         this.prioridad = nuevaPrioridad;
     }
 
-    public void cambiarEstado(String nuevoEstado) {
-        if (nuevoEstado.equals("completada") || nuevoEstado.equals("incompleta")) {
-            this.estado = nuevoEstado;
+    public void marcarComoCompleta() {
+        this.completa = true;
+    }
+
+    public boolean estaVencida() {
+        return !completa && fechaLimite.isBefore(LocalDate.now());
+    }
+
+    public boolean estaCompleta() {
+        return completa;
+    }
+
+    @Override
+    public String toString() {
+        if (completa) {
+            return descripcion + " (Completa)";
+        } else if (estaVencida()) {
+            return descripcion + " (Vencida)";
         } else {
-            throw new IllegalArgumentException("Estado inválido. Debe ser 'completada' o 'incompleta'.");
+            return descripcion;
         }
-    }
-
-    public boolean esVencida() {
-        return fechaLimite != null && estado.equals("incompleta") && LocalDate.now().isAfter(fechaLimite);
-    }
-
-    public void imprimirTarea() {
-        String mensaje = (estado.equals("completada") ? "(Vencida) " : "") + descripcion + " - Prioridad: " + prioridad;
-        if (fechaLimite != null) {
-            mensaje += " - Fecha Límite: " + fechaLimite;
-        }
-        System.out.println(mensaje);
     }
 }
+
