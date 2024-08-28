@@ -6,26 +6,30 @@ package ar.edu.unlu.Poo1;
 
 	import java.time.LocalDate;
 
+	import java.time.LocalDate;
+
 	public class MainTarea {
 	    public static void main(String[] args) {
-	        // Crear la lista de tareas
-	        Lista listaTareas = new Lista();
+	        // Crear lista de tareas
+	        ListaTarea lista = new ListaTarea("Tareas Pendientes", "Lista de tareas para la semana");
 
 	        // Crear tareas
-	        Tarea tarea1 = new Tarea("Ir al supermercado mañana", 1, LocalDate.now().plusDays(1));
-	        Tarea tarea2 = new Tarea("Consultar repuesto del auto", 2, LocalDate.now().minusDays(1));
-	        Tarea tarea3 = new Tarea("Ir al cine a ver la nueva película de Marvel", 3, LocalDate.now().minusDays(1));
+	        Tarea tarea1 = new Tarea("Ir al supermercado", "Comprar alimentos para la semana", 3, LocalDate.now().plusDays(1));
+	        Tarea tarea2 = new Tarea("Consultar repuesto del auto", "Llamar al taller para consultar disponibilidad", 2, LocalDate.now().minusDays(1));
+	        Tarea tarea3 = new Tarea("Ir al cine", "Ver la nueva película de Marvel", 4, LocalDate.now().minusDays(1));
 
-	        // Marcar la segunda tarea como completa
-	        tarea2.marcarComoCompleta();
+	        // Cambiar estado de las tareas
+	        tarea1.cambiarEstado(false); // Tarea incompleta
+	        tarea2.cambiarEstado(true);  // Tarea completa
+	        tarea3.cambiarEstado(false); // Tarea incompleta
 
-	        // Agregar las tareas a la lista
-	        listaTareas.agregar(tarea1);
-	        listaTareas.agregar(tarea2);
-	        listaTareas.agregar(tarea3);
+	        // Agregar tareas a la lista
+	        lista.agregarTarea(tarea1);
+	        lista.agregarTarea(tarea2);
+	        lista.agregarTarea(tarea3);
 
-	        // Mostrar las tareas y sus estados
-	        listaTareas.imprimir();
+	        // Mostrar lista de tareas y su estado
+	        lista.mostrarLista();
 	    }
 	}
 
